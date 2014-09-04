@@ -15,7 +15,7 @@ public class AttributesMap implements Map<String, Object> {
   }
 
   public int size() {
-    return 0; //TODO implement
+    return _req.attributes().size();
   }
 
   public boolean isEmpty() {
