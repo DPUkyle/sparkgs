@@ -70,7 +70,7 @@ public class SessionMap implements Map<String, Object> {
   //-----------------------------------------------------------
 
   public int size() {
-    return 0; //TODO implement
+    return session.attributes().size();
   }
 
   public boolean isEmpty() {
