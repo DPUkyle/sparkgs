@@ -18,13 +18,22 @@ class CookieJar implements Map<String, String>, IHasRequestContext {
     return Request.Cookies[key.toString()]
   }
 
+  /***
+   * @return previous value or null if value was not set
+   */
   override function put(key: String, value: String): String {
+    var previous = get(key)
     set(key, value)
-    return ""
+    return previous
   }
 
+  /***
+   * @return previous value or null if value was not set
+   */
   override function remove(key: Object): String {
-    return null
+    var previous = get(key)
+    Response.SparkJavaResponse.removeCookie(key as String)
+    return previous
   }
 
   override function putAll(m: Map< ? extends String, ? extends String>) {

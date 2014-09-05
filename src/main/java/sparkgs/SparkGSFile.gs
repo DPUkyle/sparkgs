@@ -45,7 +45,7 @@ abstract class SparkGSFile implements IHasRequestContext, IManagedProgramInstanc
         Spark.staticFileLocation(path)
       }
     } else {
-      print("Cannot reinitialize static directory...") //TODO cgross - log this properly
+      logError( \-> "Cannot reinitialize static directory: ${path}")
     }
   }
 

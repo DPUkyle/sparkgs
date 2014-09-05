@@ -24,7 +24,9 @@ class SparkGSRequestSupport {
   }
 
   static function clear() {
-    _REQUEST.set(null)
-    _RESPONSE.set(null)
+    //_REQUEST.set(null)
+    //_RESPONSE.set(null)
+    _REQUEST.remove()
+    _RESPONSE.remove()
   }
 }
