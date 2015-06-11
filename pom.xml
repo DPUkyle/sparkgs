@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.gosu-lang.sparkgs</groupId>
   <artifactId>sparkgs</artifactId>
-  <version>0.1-alpha3-SNAPSHOT</version>
+  <version>0.1-alpha1-SNAPSHOT</version>
   <name>sparkgs</name>
   <url>http://sparkgs.github.io/</url>
 
@@ -30,7 +30,7 @@
     <dependency>
       <groupId>org.gosu-lang.gosu</groupId>
       <artifactId>gosu</artifactId>
-      <version>0.10.J82</version>
+      <version>0.10.J84</version>
       <type>pom</type>
       <exclusions>
         <exclusion>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-core</artifactId>
-      <version>2.0.0</version>
+      <version>2.2</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>

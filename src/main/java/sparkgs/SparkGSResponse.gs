@@ -1,5 +1,6 @@
 package sparkgs
 
+uses gw.lang.reflect.ReflectUtil
 uses spark.Response
 uses java.util.Stack
 uses spark.Spark
@@ -41,7 +42,8 @@ class SparkGSResponse {
 
   function handleLayouts(body: String): String {
     while (_layouts.HasElements) {
-      body = _layouts.pop().renderToString(body)
+      var layout = _layouts.pop()
+      body = ReflectUtil.invokeMethod( layout, "renderToString", {body} ) as String
     }
     return body
   }

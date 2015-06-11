@@ -1,9 +1,6 @@
-#!/usr/bin/env gosu
-classpath "org.gosu-lang.sparkgs:sparkgs:0.1-SNAPSHOT,."
-
-uses controller.*
-uses view.*
-uses view.layout.*
+uses demo.controller.*
+uses demo.view.*
+uses demo.view.layout.*
 uses java.util.*
 uses java.lang.Exception
 uses sparkgs.SparkGSRequest
@@ -11,8 +8,7 @@ uses java.lang.Thread
 
 extends sparkgs.SparkGSFile
 
-//// Config
-StaticFiles = "/public"
+StaticFiles = "/demo/public"
 Layout = AppLayout
 
 using(metering()) {
@@ -75,12 +71,12 @@ using(metering()) {
   get("/fl_example", TestController#foo())
   get("/fl_static_example", TestController#staticFoo())
   get("/fl_bad", TestController#bar())
-  
+
   get("/log_info", \-> {
     logInfo(Request.SparkJavaRequest.queryString())
     return "${Params['bar']}"
   })
-  
+
   get("/log_info_w_block", \-> {
     logInfo(\-> "A Block Log Message!")
     return "${Params['bar']}"
@@ -101,8 +97,10 @@ using(metering()) {
 
   // exception handling
   get("/exception", \-> { throw "Foo!" } )
+
   onException(Exception, \ ex, req, resp -> {
     ex.printStackTrace()
-    resp.Body = "Exception Handled! + ${ex.Message}"
+    resp.Body = "Exception Handled!" + ex.Message
   })
+
 }

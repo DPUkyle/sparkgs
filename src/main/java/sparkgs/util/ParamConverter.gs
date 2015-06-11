@@ -20,7 +20,7 @@ class ParamConverter {
     return result;
   }
 
-  static function convertValue(paramType : Type, paramValue : String) : Object {
+  static function convertValue(paramType : IType, paramValue : String) : Object {
     if (paramType == boolean) {
       return "on".equals(paramValue) or "true".equals(paramValue)
     }
@@ -64,7 +64,7 @@ class ParamConverter {
     }
   }
 
-  static function getFactoryMethod(type : Type) : IMethodInfo {
+  static function getFactoryMethod(type : IType) : IMethodInfo {
     for(var method in type.TypeInfo.Methods) {
       if(method.Static and method.DisplayName == "fromId" and method.ReturnType.Name == type.Name and method.Parameters.Count == 1) {
         return method

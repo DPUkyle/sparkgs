@@ -1,5 +1,7 @@
 package sparkgs.util
 
+uses java.lang.reflect.Method
+uses java.lang.reflect.Proxy
 uses java.util.Map
 uses java.util.Set
 uses java.util.Collection
@@ -9,6 +11,7 @@ class HeaderMap implements Map<String, String>, IHasRequestContext {
 
   private construct(){}
   static var _instance = new HeaderMap()
+  delegate _fakeMap represents Map<String, String> = new FakeMap();
 
   static property get Instance() : HeaderMap {
     return _instance
@@ -23,47 +26,8 @@ class HeaderMap implements Map<String, String>, IHasRequestContext {
     return ""
   }
 
-  override function putAll(m: Map< ? extends String, ? extends String>) {
+  override function putAll(m: Map<String, String>) {
     m.eachKeyAndValue( \ k, v -> put(k, v) )
   }
 
-  //----------------------------------------------------
-  //  Unsupported Junk
-  //----------------------------------------------------
-  override function size(): int {
-    throw new UnsupportedOperationException()
-  }
-
-  override function remove(key: Object): String {
-    throw new UnsupportedOperationException()
-  }
-
-
-  override property get Empty(): boolean {
-    throw new UnsupportedOperationException()
-  }
-
-  override function containsKey(key: Object): boolean {
-    throw new UnsupportedOperationException()
-  }
-
-  override function containsValue(value: Object): boolean {
-    throw new UnsupportedOperationException()
-  }
-
-  override function clear() {
-    throw new UnsupportedOperationException()
-  }
-
-  override function keySet(): Set<String> {
-    throw new UnsupportedOperationException()
-  }
-
-  override function values(): Collection<String> {
-    throw new UnsupportedOperationException()
-  }
-
-  override function entrySet(): Set<Map.Entry<String, String>> {
-    throw new UnsupportedOperationException()
-  }
 }

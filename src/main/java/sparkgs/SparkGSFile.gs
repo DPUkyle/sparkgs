@@ -50,7 +50,7 @@ abstract class SparkGSFile implements IHasRequestContext, IManagedProgramInstanc
   }
 
   property set Port(port : int) {
-    Spark.setPort(port)
+    Spark.port(port)
   }
 
   //===================================================================
@@ -188,7 +188,7 @@ abstract class SparkGSFile implements IHasRequestContext, IManagedProgramInstanc
 
   function path(path : String) : Closeable {
     _pathQueue.add(path)
-    return \-> _pathQueue.remove()
+    return new CloseableBlock(\-> _pathQueue.remove())
   }
 
   private function handleRoutes(path : String, routes : block()) {
@@ -212,30 +212,30 @@ abstract class SparkGSFile implements IHasRequestContext, IManagedProgramInstanc
 
   function filter(filter : ISparkGSFilter) : Closeable {
     _filterStack.push(filter)
-    return \-> _filterStack.pop()
+    return new CloseableBlock(\-> _filterStack.pop())
   }
 
   function filters(filters : List<ISparkGSFilter>) : Closeable {
     filters.each(\ f -> _filterStack.push(f))
-    return \-> filters.each(\ f -> _filterStack.pop() )
+    return new CloseableBlock(\-> filters.each(\ f -> _filterStack.pop() ))
   }
 
   function beforeFilter(blk : block(req: SparkGSRequest, resp: SparkGSResponse)) : Closeable {
-    return filter(ISparkGSFilter.wrapBefore(blk))
+    return filter(ISparkGSFilter.UTIL.wrapBefore( blk ))
   }
 
   function beforeFilters(filters : List<block(req: SparkGSRequest, resp: SparkGSResponse)>) : Closeable {
-    filters.each(\ f -> _filterStack.push(ISparkGSFilter.wrapBefore(f)))
-    return \-> filters.each(\ f -> _filterStack.pop() )
+    filters.each(\ f -> _filterStack.push(ISparkGSFilter.UTIL.wrapBefore( f )))
+    return new CloseableBlock(\-> filters.each(\ f -> _filterStack.pop() ))
   }
 
   function afterFilter(blk : block(req: SparkGSRequest, resp: SparkGSResponse)) : Closeable {
-    return filter(ISparkGSFilter.wrapAfter(blk))
+    return filter(ISparkGSFilter.UTIL.wrapAfter( blk ))
   }
 
   function afterFilters(filters : List<block(req: SparkGSRequest, resp: SparkGSResponse)>) : Closeable {
-    filters.each(\ f -> _filterStack.push(ISparkGSFilter.wrapAfter(f)))
-    return \-> filters.each(\ f -> _filterStack.pop() )
+    filters.each(\ f -> _filterStack.push(ISparkGSFilter.UTIL.wrapAfter( f )))
+    return new CloseableBlock(\-> filters.each(\ f -> _filterStack.pop() ))
   }
 
   // Telescope through the stack of filters

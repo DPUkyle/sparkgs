@@ -9,6 +9,7 @@ class CookieJar implements Map<String, String>, IHasRequestContext {
 
   private construct(){}
   static var _instance = new CookieJar()
+  delegate _fakeMap represents Map<String, String> = new FakeMap();
 
   static property get Instance() : CookieJar {
     return _instance
@@ -36,46 +37,11 @@ class CookieJar implements Map<String, String>, IHasRequestContext {
     return previous
   }
 
-  override function putAll(m: Map< ? extends String, ? extends String>) {
+  override function putAll(m: Map<String, String>) {
     m.eachKeyAndValue( \ k, v -> put(k, v) )
   }
 
   function set(cookieName : String, value : String, expires = -1, secure  = false, path  = "") {
       Response.SparkJavaResponse.cookie(path, cookieName, value, expires, secure)
-  }
-
-  //----------------------------------------------------
-  //  Unsupported Junk
-  //----------------------------------------------------
-  override function size(): int {
-    throw new UnsupportedOperationException()
-  }
-
-  override property get Empty(): boolean {
-    throw new UnsupportedOperationException()
-  }
-
-  override function containsKey(key: Object): boolean {
-    throw new UnsupportedOperationException()
-  }
-
-  override function containsValue(value: Object): boolean {
-    throw new UnsupportedOperationException()
-  }
-
-  override function clear() {
-    throw new UnsupportedOperationException()
-  }
-
-  override function keySet(): Set<String> {
-    throw new UnsupportedOperationException()
-  }
-
-  override function values(): Collection<String> {
-    throw new UnsupportedOperationException()
-  }
-
-  override function entrySet(): Set<Map.Entry<String, String>> {
-    throw new UnsupportedOperationException()
   }
 }

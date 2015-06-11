@@ -1,4 +1,4 @@
-package controller
+package demo.controller
 
 uses sparkgs.util.IHasRequestContext
 uses sparkgs.IResourceController

@@ -1,5 +1,7 @@
 package sparkgs.util
 
+uses sparkgs.CloseableBlock
+
 uses java.io.Closeable
 
 class Trace {
@@ -22,7 +24,7 @@ class Trace {
 
   function traceWith(name : String) : Closeable {
     begin(name)
-    return \-> end()
+    return new CloseableBlock( \-> end() )
   }
 
   function print() : String {

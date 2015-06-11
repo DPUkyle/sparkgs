@@ -1,4 +1,4 @@
-package controller
+package demo.controller
 
 class TestController implements sparkgs.util.IHasRequestContext {
   
