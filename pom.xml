@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.gosu-lang.sparkgs</groupId>
   <artifactId>sparkgs</artifactId>
-  <version>0.1-alpha1-SNAPSHOT</version>
+  <version>0.1-alpha3-SNAPSHOT</version>
   <name>sparkgs</name>
   <url>http://sparkgs.github.io/</url>
 
@@ -14,9 +14,27 @@
 
   <repositories>
     <repository>
-      <id>gosu-lang.org-releases</id>
-      <name>Official Gosu website (releases)</name>
-      <url>http://gosu-lang.org/repositories/m2/releases</url>
+      <id>gosu-lang.org-gosu</id>
+      <name>Official Gosu website (gosu)</name>
+      <url>http://gosu-lang.org/nexus/content/repositories/gosu</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+    <repository>
+      <id>gosu-lang.org-snapshots</id>
+      <name>Official Gosu website (snapshots)</name>
+      <url>http://gosu-lang.org/nexus/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </repository>
   </repositories>
 
@@ -26,11 +44,29 @@
     <version>7</version>
   </parent>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <dist.man.repo.url>http://gosu-lang.org/nexus/content/repositories/gosu</dist.man.repo.url>
+    <dist.man.snapshotrepo.url>http://gosu-lang.org/nexus/content/repositories/snapshots</dist.man.snapshotrepo.url>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>gosu-lang.org-gosu</id>
+      <url>${dist.man.repo.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>gosu-lang.org-snapshots</id>
+      <url>${dist.man.snapshotrepo.url}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.gosu-lang.gosu</groupId>
       <artifactId>gosu</artifactId>
-      <version>0.10.J84</version>
+      <version>1-j8-fixasm-SNAPSHOT</version>
       <type>pom</type>
       <exclusions>
         <exclusion>
