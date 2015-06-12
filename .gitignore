@@ -1,3 +1,5 @@
+.DS_Store
+gosu.compiler.log.txt
 www
 .idea
 sparkgs.iml
