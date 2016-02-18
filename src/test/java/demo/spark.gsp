@@ -1,3 +1,5 @@
+classpath ".."
+
 uses demo.controller.*
 uses demo.view.*
 uses demo.view.layout.*

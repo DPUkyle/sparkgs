@@ -5,7 +5,7 @@ uses sparkgs.util.*
 uses java.lang.*
 uses gw.lang.reflect.*
 uses gw.lang.reflect.gs.*
-uses gw.lang.cli.*
+uses gw.lang.*
 uses java.io.File
 uses spark.utils.SparkUtils
 uses java.io.Closeable
@@ -284,9 +284,9 @@ abstract class SparkGSFile implements IHasRequestContext, IManagedProgramInstanc
   }
 
   override function beforeExecution() : boolean {
-    if(CommandLineAccess.RawArgs.size() > 1) {
-      if(CommandLineAccess.RawArgs[0] == "--port") {
-        Port = CommandLineAccess.RawArgs[1].toInt()
+    if(Gosu.RawArgs.size() > 1) {
+      if(Gosu.RawArgs[0] == "--port") {
+        Port = Gosu.RawArgs[1].toInt()
       }
     }
     return true
