@@ -1,5 +1,3 @@
-classpath ".."
-
 uses demo.controller.*
 uses demo.view.*
 uses demo.view.layout.*
@@ -33,7 +31,10 @@ using(metering()) {
     get('/selective', \ -> 'Check out the page at /metering_selective')
   }
 
-  get('/custom/:id/ids', \ -> {Thread.sleep(700) return Params['id']})
+  get('/custom/:id/ids', \ -> {
+    Thread.sleep(700)
+    return Params['id']
+  })
 
   // Post example
   post("/post_to", \-> Params['foo'] )
