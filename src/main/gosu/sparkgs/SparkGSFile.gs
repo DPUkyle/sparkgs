@@ -22,7 +22,7 @@ abstract class SparkGSFile implements IHasRequestContext, IManagedProgramInstanc
   static var _metricsStack : Stack<MetricRegistry> as MetricsStack = new()
   static var _setup : block(req:spark.Request, resp:spark.Response)
 
-  construct(){
+  construct() {
     // Look for a PORT environment variable
     var port = System.Env["PORT"]
     if (port != null) {
@@ -284,7 +284,7 @@ abstract class SparkGSFile implements IHasRequestContext, IManagedProgramInstanc
   }
 
   override function beforeExecution() : boolean {
-    if(Gosu.RawArgs.size() > 1) {
+    if(Gosu.RawArgs != null and Gosu.RawArgs.size() > 1) {
       if(Gosu.RawArgs[0] == "--port") {
         Port = Gosu.RawArgs[1].toInt()
       }
