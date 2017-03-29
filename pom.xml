@@ -16,7 +16,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <dist.man.snapshotrepo.url>https://oss.sonatype.org/content/repositories/snapshots</dist.man.snapshotrepo.url>
-    <gosu.version>1.13.2</gosu.version>
+    <gosu.version>1.14.5</gosu.version>
   </properties>
 
   <repositories>
